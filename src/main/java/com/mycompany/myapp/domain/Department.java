@@ -29,6 +29,9 @@ public class Department implements Serializable {
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 
+    @Column(name = "building")
+    private String building;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Location location;
@@ -61,6 +64,19 @@ public class Department implements Serializable {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public Department building(String building) {
+        this.building = building;
+        return this;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
     }
 
     public Location getLocation() {
@@ -124,6 +140,7 @@ public class Department implements Serializable {
         return "Department{" +
             "id=" + getId() +
             ", departmentName='" + getDepartmentName() + "'" +
+            ", building='" + getBuilding() + "'" +
             "}";
     }
 }

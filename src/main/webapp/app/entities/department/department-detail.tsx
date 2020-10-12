@@ -29,6 +29,10 @@ export const DepartmentDetail = (props: IDepartmentDetailProps) => {
             <span id="departmentName">Department Name</span>
           </dt>
           <dd>{departmentEntity.departmentName}</dd>
+          <dt>
+            <span id="building">Building</span>
+          </dt>
+          <dd>{departmentEntity.building}</dd>
           <dt>Location</dt>
           <dd>{departmentEntity.location ? departmentEntity.location.id : ''}</dd>
         </dl>

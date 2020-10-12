@@ -34,6 +34,7 @@ export const Department = (props: IDepartmentProps) => {
               <tr>
                 <th>ID</th>
                 <th>Department Name</th>
+                <th>Building</th>
                 <th>Location</th>
                 <th />
               </tr>
@@ -47,6 +48,7 @@ export const Department = (props: IDepartmentProps) => {
                     </Button>
                   </td>
                   <td>{department.departmentName}</td>
+                  <td>{department.building}</td>
                   <td>{department.location ? <Link to={`location/${department.location.id}`}>{department.location.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
