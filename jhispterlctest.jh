@@ -17,7 +17,9 @@ entity Location {
 }
 
 entity Department {
-	departmentName String required
+	departmentName String required,
+    //建筑
+    building String
 }
 
 /**
