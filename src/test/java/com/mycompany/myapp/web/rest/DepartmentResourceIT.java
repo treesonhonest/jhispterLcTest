@@ -33,6 +33,9 @@ public class DepartmentResourceIT {
     private static final String DEFAULT_DEPARTMENT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_DEPARTMENT_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_BUILDING = "AAAAAAAAAA";
+    private static final String UPDATED_BUILDING = "BBBBBBBBBB";
+
     @Autowired
     private DepartmentRepository departmentRepository;
 
@@ -55,7 +58,8 @@ public class DepartmentResourceIT {
      */
     public static Department createEntity(EntityManager em) {
         Department department = new Department()
-            .departmentName(DEFAULT_DEPARTMENT_NAME);
+            .departmentName(DEFAULT_DEPARTMENT_NAME)
+            .building(DEFAULT_BUILDING);
         return department;
     }
     /**
@@ -66,7 +70,8 @@ public class DepartmentResourceIT {
      */
     public static Department createUpdatedEntity(EntityManager em) {
         Department department = new Department()
-            .departmentName(UPDATED_DEPARTMENT_NAME);
+            .departmentName(UPDATED_DEPARTMENT_NAME)
+            .building(UPDATED_BUILDING);
         return department;
     }
 
@@ -90,6 +95,7 @@ public class DepartmentResourceIT {
         assertThat(departmentList).hasSize(databaseSizeBeforeCreate + 1);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
         assertThat(testDepartment.getDepartmentName()).isEqualTo(DEFAULT_DEPARTMENT_NAME);
+        assertThat(testDepartment.getBuilding()).isEqualTo(DEFAULT_BUILDING);
     }
 
     @Test
@@ -142,7 +148,8 @@ public class DepartmentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId().intValue())))
-            .andExpect(jsonPath("$.[*].departmentName").value(hasItem(DEFAULT_DEPARTMENT_NAME)));
+            .andExpect(jsonPath("$.[*].departmentName").value(hasItem(DEFAULT_DEPARTMENT_NAME)))
+            .andExpect(jsonPath("$.[*].building").value(hasItem(DEFAULT_BUILDING)));
     }
     
     @Test
@@ -156,7 +163,8 @@ public class DepartmentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(department.getId().intValue()))
-            .andExpect(jsonPath("$.departmentName").value(DEFAULT_DEPARTMENT_NAME));
+            .andExpect(jsonPath("$.departmentName").value(DEFAULT_DEPARTMENT_NAME))
+            .andExpect(jsonPath("$.building").value(DEFAULT_BUILDING));
     }
     @Test
     @Transactional
@@ -179,7 +187,8 @@ public class DepartmentResourceIT {
         // Disconnect from session so that the updates on updatedDepartment are not directly saved in db
         em.detach(updatedDepartment);
         updatedDepartment
-            .departmentName(UPDATED_DEPARTMENT_NAME);
+            .departmentName(UPDATED_DEPARTMENT_NAME)
+            .building(UPDATED_BUILDING);
 
         restDepartmentMockMvc.perform(put("/api/departments")
             .contentType(MediaType.APPLICATION_JSON)
@@ -191,6 +200,7 @@ public class DepartmentResourceIT {
         assertThat(departmentList).hasSize(databaseSizeBeforeUpdate);
         Department testDepartment = departmentList.get(departmentList.size() - 1);
         assertThat(testDepartment.getDepartmentName()).isEqualTo(UPDATED_DEPARTMENT_NAME);
+        assertThat(testDepartment.getBuilding()).isEqualTo(UPDATED_BUILDING);
     }
 
     @Test

@@ -90,6 +90,12 @@ export const DepartmentUpdate = (props: IDepartmentUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
+                <Label id="buildingLabel" for="department-building">
+                  Building
+                </Label>
+                <AvField id="department-building" type="text" name="building" />
+              </AvGroup>
+              <AvGroup>
                 <Label for="department-location">Location</Label>
                 <AvInput id="department-location" type="select" className="form-control" name="location.id">
                   <option value="" key="0" />
